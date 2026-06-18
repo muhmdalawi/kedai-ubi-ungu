@@ -1,5 +1,8 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use Illuminate\Support\ServiceProvider;
+
 return [
 
     /*
@@ -104,6 +107,20 @@ return [
             explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Autoloaded Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | Keep the provider list explicit so cached serverless deployments still
+    | register Laravel's core services, including the view factory.
+    |
+    */
+
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        AppServiceProvider::class,
+    ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
