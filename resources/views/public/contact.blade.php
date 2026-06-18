@@ -1,0 +1,8 @@
+@extends('layouts.public')
+@section('title', 'Kontak — Kedai Ubi Ungu')
+@section('content')
+<section class="py-20"><div class="container-site grid gap-10 lg:grid-cols-2">
+    <div><span class="eyebrow">Kontak</span><h1 class="section-title">Mampir atau sapa kami.</h1><p class="mt-5 max-w-xl leading-8 text-stone-600">Ada pertanyaan tentang menu, pesanan besar, atau kerja sama? Kami senang mendengarnya.</p><div class="mt-9 grid gap-4"><a href="{{ $contact?->whatsapp_link }}" class="card p-5 hover:-translate-y-1"><strong class="text-ube-800">WhatsApp</strong><p class="mt-1 text-sm text-stone-500">{{ $contact?->whatsapp }}</p></a><a href="{{ $contact?->instagram }}" class="card p-5 hover:-translate-y-1"><strong class="text-ube-800">Instagram</strong><p class="mt-1 text-sm text-stone-500">{{ $contact?->instagram }}</p></a><a href="mailto:{{ $contact?->email }}" class="card p-5 hover:-translate-y-1"><strong class="text-ube-800">Email</strong><p class="mt-1 text-sm text-stone-500">{{ $contact?->email }}</p></a></div></div>
+    <div class="overflow-hidden rounded-[3rem] bg-ube-900 p-8 text-white sm:p-12"><img src="{{ $businessProfile?->logo_url }}" class="h-24 w-24 rounded-3xl object-cover" alt="Logo"><h2 class="mt-6 text-3xl font-black">{{ $businessProfile?->business_name }}</h2><p class="mt-5 leading-8 text-ube-200">{{ $businessProfile?->history }}</p><div class="mt-8 border-t border-white/10 pt-7 text-sm leading-8"><strong>Alamat</strong><p>{{ $businessProfile?->address }}</p><strong class="mt-4 block">Jam Operasional</strong><p>{{ $businessProfile?->operational_hours }}</p></div><a href="{{ $contact?->maps_link }}" target="_blank" class="btn-secondary mt-7">Buka Google Maps ↗</a></div>
+</div></section>
+@endsection

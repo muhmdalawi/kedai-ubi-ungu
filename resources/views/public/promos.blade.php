@@ -1,0 +1,5 @@
+@extends('layouts.public')
+@section('title', 'Promo — Kedai Ubi Ungu')
+@section('content')
+<section class="py-16"><div class="container-site"><div class="text-center"><span class="eyebrow">Promo & Informasi</span><h1 class="section-title">Kabar manis dari kedai.</h1></div><div class="mt-10 grid gap-7 md:grid-cols-2">@foreach($promos as $promo)<article class="card overflow-hidden"><img src="{{ $promo->image_url }}" alt="{{ $promo->title }}" class="aspect-[16/8] w-full object-cover"><div class="p-7"><span class="badge {{ $promo->is_active && $promo->start_date <= now() && $promo->end_date >= now() ? 'bg-emerald-100 text-emerald-700' : 'bg-stone-100 text-stone-500' }}">{{ $promo->is_active ? 'Aktif' : 'Tidak Aktif' }}</span><h2 class="mt-4 text-2xl font-black">{{ $promo->title }}</h2><p class="mt-3 leading-7 text-stone-600">{{ $promo->description }}</p><p class="mt-5 text-sm font-bold text-ube-700">{{ $promo->start_date->format('d M Y') }} — {{ $promo->end_date->format('d M Y') }}</p></div></article>@endforeach</div><div class="mt-10">{{ $promos->links() }}</div></div></section>
+@endsection
