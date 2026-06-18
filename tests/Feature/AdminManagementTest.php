@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Banner;
+use App\Models\BusinessProfile;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Order;
 use App\Models\Topping;
 use App\Models\User;
@@ -91,6 +93,47 @@ class AdminManagementTest extends TestCase
             'title' => 'Banner Diperbarui',
             'is_active' => false,
         ]);
+    }
+
+    public function test_business_logo_can_be_replaced_from_admin_settings(): void
+    {
+        Storage::fake('public');
+        config(['filesystems.upload_disk' => 'public']);
+
+        $profile = BusinessProfile::create([
+            'business_name' => 'Kedai Lama',
+            'logo' => 'assets/logo/logo-1.png',
+            'description' => 'Deskripsi kedai.',
+            'history' => 'Sejarah kedai.',
+            'address' => 'Jakarta',
+            'operational_hours' => '09.00-21.00',
+        ]);
+        Contact::create([
+            'whatsapp' => '628123456789',
+            'instagram' => 'https://instagram.com/kedai',
+            'email' => 'kedai@example.com',
+            'maps_link' => 'https://maps.google.com',
+            'shopee_link' => 'https://shopee.co.id',
+        ]);
+
+        $this->put('/admin/settings', [
+            'business_name' => 'Kedai Baru',
+            'logo' => UploadedFile::fake()->image('logo-baru.png', 600, 600),
+            'description' => 'Deskripsi kedai.',
+            'history' => 'Sejarah kedai.',
+            'address' => 'Jakarta',
+            'operational_hours' => '09.00-21.00',
+            'whatsapp' => '628123456789',
+            'instagram' => 'https://instagram.com/kedai',
+            'email' => 'kedai@example.com',
+            'maps_link' => 'https://maps.google.com',
+            'shopee_link' => 'https://shopee.co.id',
+        ])->assertRedirect()->assertSessionHas('success');
+
+        $profile->refresh();
+        $this->assertNotSame('assets/logo/logo-1.png', $profile->logo);
+        Storage::disk('public')->assertExists($profile->logo);
+        $this->get('/admin')->assertOk()->assertSee($profile->logo_url, false);
     }
 
     public function test_order_status_and_reports_work(): void

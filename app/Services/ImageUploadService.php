@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use RuntimeException;
 use Throwable;
 
 class ImageUploadService
@@ -20,11 +21,18 @@ class ImageUploadService
         try {
             $manager = new ImageManager(new Driver);
             $encoded = $manager->read($file->getRealPath())->scaleDown(width: 1600, height: 1600)->toWebp(82);
-            Storage::disk($disk)->put($path, (string) $encoded);
+            if (! Storage::disk($disk)->put($path, (string) $encoded)) {
+                throw new RuntimeException('Gambar gagal disimpan ke disk upload.');
+            }
 
             return $path;
-        } catch (Throwable) {
-            return $file->store($directory, $disk);
+        } catch (Throwable $exception) {
+            $fallbackPath = $file->store($directory, $disk);
+            if (! $fallbackPath) {
+                throw new RuntimeException('Gambar gagal diunggah.', previous: $exception);
+            }
+
+            return $fallbackPath;
         }
     }
 

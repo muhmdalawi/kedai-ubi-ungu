@@ -18,8 +18,8 @@
 <div data-admin-shell class="admin-shell min-h-screen lg:grid">
     <aside class="admin-sidebar flex max-h-[70vh] flex-col bg-ube-950 p-4 text-white shadow-2xl shadow-ube-950/20 lg:sticky lg:top-0 lg:h-screen lg:max-h-screen">
         <a href="{{ route('admin.dashboard') }}" class="admin-brand mb-4 flex shrink-0 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3" title="Kedai Ubi Ungu">
-            <img src="{{ asset('assets/logo/logo-4.png') }}" class="h-11 w-11 shrink-0 rounded-2xl bg-white object-cover">
-            <div class="admin-label min-w-0"><strong class="block truncate text-white">Kedai Ubi Ungu</strong><span class="text-xs font-semibold text-ube-200">Administration</span></div>
+            <img src="{{ $businessProfile?->logo_url ?? asset('assets/logo/logo-1.png') }}" alt="Logo {{ $businessProfile?->business_name ?? 'Kedai Ubi Ungu' }}" class="h-11 w-11 shrink-0 rounded-2xl bg-white object-cover">
+            <div class="admin-label min-w-0"><strong class="block truncate text-white">{{ $businessProfile?->business_name ?? 'Kedai Ubi Ungu' }}</strong><span class="text-xs font-semibold text-ube-200">Administration</span></div>
         </a>
         <nav class="admin-sidebar-nav grid min-h-0 flex-1 content-start gap-1 overflow-y-auto pr-1">
             <a class="admin-link {{ request()->routeIs('admin.dashboard')?'active':'' }}" href="{{ route('admin.dashboard') }}" title="Dashboard"><span class="admin-icon"><x-icon name="dashboard"/></span><span class="admin-label">Dashboard</span></a>

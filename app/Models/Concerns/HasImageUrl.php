@@ -11,7 +11,7 @@ trait HasImageUrl
     {
         $path = $value ?? $this->image ?? null;
         if (! $path) {
-            return asset('assets/logo/logo-4.png');
+            return asset('assets/logo/logo-1.png');
         }
         if (Str::startsWith($path, ['http://', 'https://', '/'])) {
             return $path;

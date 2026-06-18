@@ -124,7 +124,7 @@ class DatabaseSeeder extends Seeder
 
         BusinessProfile::updateOrCreate(['id' => 1], [
             'business_name' => 'Kedai Ubi Ungu',
-            'logo' => 'assets/logo/logo-4.png',
+            'logo' => 'assets/logo/logo-1.png',
             'description' => 'Kreasi makanan dan minuman premium berbahan ubi ungu, dibuat segar untuk menghadirkan rasa hangat di setiap gigitan.',
             'history' => 'Berawal dari dapur rumahan pada 2024, Kedai Ubi Ungu tumbuh dari kecintaan pada bahan lokal menjadi dessert cafe dengan aneka kreasi modern.',
             'address' => 'Jl. Contoh Kuliner No. 24, Jakarta',

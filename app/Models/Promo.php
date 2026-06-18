@@ -17,6 +17,11 @@ class Promo extends Model
         return ['is_active' => 'boolean', 'start_date' => 'date', 'end_date' => 'date'];
     }
 
+    public function getImageUrlAttribute(): string
+    {
+        return $this->imageUrl($this->banner);
+    }
+
     public function scopeCurrent(Builder $query): Builder
     {
         return $query->where('is_active', true)->whereDate('start_date', '<=', now())->whereDate('end_date', '>=', now());

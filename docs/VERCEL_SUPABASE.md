@@ -21,7 +21,11 @@ APP_KEY=base64:HASIL_PHP_ARTISAN_KEY_GENERATE_SHOW
 APP_URL=https://domain-vercel-anda.vercel.app
 
 DB_CONNECTION=pgsql
-DB_URL=postgresql://USER:PASSWORD@HOST_POOLER:5432/postgres
+DB_HOST=HOST_SESSION_POOLER
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=USER_POOLER
+DB_PASSWORD=PASSWORD_DATABASE
 DB_SSLMODE=require
 
 SESSION_DRIVER=database
@@ -42,6 +46,15 @@ SUPABASE_STORAGE_PUBLIC_URL=https://PROJECT_REF.supabase.co/storage/v1/object/pu
 LOG_CHANNEL=stderr
 LOG_LEVEL=error
 ```
+
+Jangan membuat nama variabel saja tanpa mengisi kolom **Value**. Pastikan setiap
+variabel diterapkan minimal ke environment **Production**. Untuk deployment dari
+branch, sebaiknya terapkan juga ke **Preview**.
+
+Salin nilai `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` dari
+bagian **Session Pooler** Supabase. Gunakan port `5432`. Jangan menambahkan
+`DB_URL` jika memakai variabel database terpisah di atas, karena `DB_URL` akan
+menggantikan nilai-nilai tersebut.
 
 Generate `APP_KEY` tanpa mengubah `.env`:
 

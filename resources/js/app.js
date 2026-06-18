@@ -34,6 +34,25 @@ function updateCartBadges() {
 window.addEventListener('cart:updated', updateCartBadges);
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadges();
+    const homeHeader = document.querySelector('[data-home-header]');
+    if (homeHeader) {
+        const syncHeader = () => homeHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+        syncHeader();
+        window.addEventListener('scroll', syncHeader, { passive: true });
+    }
+
+    const logoInput = document.querySelector('[data-logo-input]');
+    const logoPreview = document.querySelector('[data-logo-preview]');
+    const logoFilename = document.querySelector('[data-logo-filename]');
+    logoInput?.addEventListener('change', () => {
+        const [file] = logoInput.files || [];
+        if (!file || !logoPreview) return;
+        const previewUrl = URL.createObjectURL(file);
+        logoPreview.src = previewUrl;
+        if (logoFilename) logoFilename.textContent = file.name;
+        logoPreview.onload = () => URL.revokeObjectURL(previewUrl);
+    });
+
     const adminShell = document.querySelector('[data-admin-shell]');
     const sidebarToggle = document.querySelector('[data-sidebar-toggle]');
     if (adminShell && sidebarToggle) {

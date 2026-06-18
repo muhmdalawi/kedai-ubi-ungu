@@ -16,10 +16,14 @@
     @stack('head')
 </head>
 <body>
-<header class="sticky top-0 z-50 border-b border-ube-100/80 bg-cream/90 backdrop-blur-xl">
+<header
+    data-public-header
+    @if(request()->routeIs('home')) data-home-header @endif
+    class="site-header top-0 z-50 w-full {{ request()->routeIs('home') ? 'site-header-home fixed' : 'sticky border-b border-ube-100/80 bg-cream/90 backdrop-blur-xl' }}"
+>
     <div class="container-site flex h-20 items-center justify-between">
         <a href="{{ route('home') }}" class="flex items-center gap-3">
-            <img src="{{ $businessProfile?->logo_url ?? asset('assets/logo/logo-4.png') }}" alt="Logo Kedai Ubi Ungu" class="h-12 w-12 rounded-2xl object-cover">
+            <img src="{{ $businessProfile?->logo_url ?? asset('assets/logo/logo-1.png') }}" alt="Logo Kedai Ubi Ungu" class="h-12 w-12 rounded-2xl object-cover">
             <span class="hidden font-black text-ube-900 sm:block">Kedai Ubi Ungu</span>
         </a>
         <nav class="hidden items-center gap-2 lg:flex">

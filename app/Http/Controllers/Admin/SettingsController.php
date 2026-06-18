@@ -24,10 +24,15 @@ class SettingsController extends Controller
         ]);
         $profile = BusinessProfile::firstOrFail();
         if ($request->hasFile('logo')) {
-            $images->delete($profile->logo);
+            $oldLogo = $profile->logo;
             $data['logo'] = $images->store($request->file('logo'), 'profile');
+        } else {
+            $oldLogo = null;
         }
         $profile->update(collect($data)->only(['business_name', 'description', 'history', 'address', 'operational_hours', 'logo'])->all());
+        if ($oldLogo) {
+            $images->delete($oldLogo);
+        }
         Contact::firstOrFail()->update(collect($data)->only(['whatsapp', 'instagram', 'email', 'maps_link', 'shopee_link'])->all());
 
         return back()->with('success', 'Profil, kontak, dan pengaturan Shopee berhasil disimpan.');

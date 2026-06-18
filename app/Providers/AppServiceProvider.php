@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        View::composer(['public.*', 'layouts.public'], function ($view) {
+        View::composer(['public.*', 'layouts.public', 'layouts.admin', 'admin.auth.login'], function ($view) {
             $view->with('businessProfile', BusinessProfile::first());
             $view->with('contact', Contact::first());
         });
