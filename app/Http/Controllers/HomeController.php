@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Gallery;
 use App\Models\Order;
 use App\Models\Product;
@@ -13,6 +14,7 @@ class HomeController extends Controller
     public function __invoke()
     {
         return view('public.home', [
+            'banners' => Banner::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get(),
             'bestSellers' => Product::with('category')->where('is_best_seller', true)->take(4)->get(),
             'promos' => Promo::current()->latest()->take(3)->get(),
             'testimonials' => Testimonial::latest()->take(6)->get(),

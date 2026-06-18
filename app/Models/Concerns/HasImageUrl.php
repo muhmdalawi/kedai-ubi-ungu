@@ -20,7 +20,7 @@ trait HasImageUrl
             return asset($path);
         }
 
-        return Storage::disk('public')->url($path);
+        return Storage::disk(config('filesystems.upload_disk', 'public'))->url($path);
     }
 
     public function getImageUrlAttribute(): string

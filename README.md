@@ -5,11 +5,12 @@ Website company profile, katalog, pemesanan WhatsApp, dan dashboard administrasi
 ## Fitur
 
 - Home, katalog dengan pencarian/filter, galeri, promo, dan kontak.
+- Carousel banner autoplay yang dapat dikelola melalui CRUD admin.
 - Variasi produk serta topping bergambar dengan perhitungan harga langsung.
 - Keranjang multi-produk berbasis browser.
 - Checkout tersimpan ke database dan diteruskan ke WhatsApp.
 - Login admin manual berbasis session.
-- CRUD kategori, produk, topping, variasi, promo, galeri, dan testimoni.
+- CRUD banner, kategori, produk, topping, variasi, promo, galeri, dan testimoni.
 - Pengelolaan pesanan dan lima status proses.
 - Profil usaha, kontak, link serta QR Code Shopee.
 - Dashboard statistik dan laporan PDF menu, pesanan, serta promo.
@@ -93,6 +94,8 @@ Test otomatis menggunakan SQLite in-memory agar terisolasi. Aplikasi lokal tetap
 - Jalankan `php artisan storage:link` agar upload dapat diakses melalui `/storage`.
 - Upload baru diperkecil maksimal 1600 × 1600 dan dikonversi ke WebP bila GD tersedia.
 
-## Catatan Scope
+## Deployment Vercel + Supabase
 
-Konfigurasi Vercel, Supabase PostgreSQL production, dan Supabase Storage tidak termasuk implementasi ini. Struktur database dan pemisahan layanan upload telah disiapkan agar integrasi cloud dapat dilakukan pada tahap deployment.
+Project telah dilengkapi entrypoint serverless Vercel, konfigurasi runtime PHP, koneksi Supabase PostgreSQL, dan disk Supabase Storage yang kompatibel dengan S3.
+
+Panduan lengkap terdapat di [docs/VERCEL_SUPABASE.md](docs/VERCEL_SUPABASE.md).

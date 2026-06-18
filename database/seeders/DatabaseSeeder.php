@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Banner;
 use App\Models\BusinessProfile;
 use App\Models\Category;
 use App\Models\Contact;
@@ -22,6 +23,26 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@kedaiubiungu.test'],
             ['name' => 'Admin Kedai Ubi Ungu', 'password' => Hash::make('password'), 'is_admin' => true],
         );
+
+        $bannerContent = [
+            ['Dari Kebun ke Meja Anda', 'Kreasi ubi ungu premium yang dibuat segar setiap hari dengan bahan pilihan.', 'Lihat Menu', '/menu'],
+            ['Rasakan Manisnya Purple Week', 'Nikmati menu favorit dengan promo spesial untuk momen yang lebih hangat.', 'Lihat Promo', '/promo'],
+            ['Camilan Ungu, Mood Jadi Baru', 'Temukan dessert, minuman, dan camilan unik untuk menemani harimu.', 'Pesan Sekarang', '/menu'],
+            ['Dibuat dengan Hangat', 'Setiap pesanan diracik penuh perhatian dari dapur Kedai Ubi Ungu.', 'Tentang Kedai', '/kontak'],
+            ['Pilih Variasi Favoritmu', 'Regular atau Large, lengkap dengan topping yang bisa kamu kombinasikan sendiri.', 'Racik Menu', '/menu'],
+            ['Momen Manis Bersama', 'Kedai Ubi Ungu hadir untuk teman ngobrol, keluarga, dan perayaan kecilmu.', 'Lihat Galeri', '/galeri'],
+            ['Mudah Dipesan, Siap Dinikmati', 'Masukkan menu ke keranjang dan kirim pesanan langsung melalui WhatsApp.', 'Mulai Pesan', '/pesan'],
+        ];
+        foreach ($bannerContent as $index => [$title, $subtitle, $buttonText, $buttonUrl]) {
+            Banner::updateOrCreate(['sort_order' => $index + 1], [
+                'title' => $title,
+                'subtitle' => $subtitle,
+                'image' => 'assets/banner/banner-'.($index + 1).'.png',
+                'button_text' => $buttonText,
+                'button_url' => $buttonUrl,
+                'is_active' => true,
+            ]);
+        }
 
         $categories = collect([
             ['name' => 'Dessert', 'description' => 'Kreasi pencuci mulut berbahan ubi ungu.'],
@@ -70,16 +91,16 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        Promo::updateOrCreate(['title' => 'Purple Week'], [
-            'banner' => 'assets/banner/banner-2.png',
-            'description' => 'Nikmati harga spesial untuk pilihan menu best seller selama Purple Week.',
+        Promo::updateOrCreate(['title' => 'Menu Favorit Pelanggan, Wajib Dicoba!'], [
+            'banner' => 'assets/promo/promo-1.png',
+            'description' => 'Temukan produk best seller Kedai Ubi Ungu mulai dari Es Ubi Ungu, Lumpia Ubi Ungu, hingga Bola-Bola Ubi Ungu yang selalu menjadi pilihan pelanggan.',
             'start_date' => now()->subDays(7),
             'end_date' => now()->addMonths(3),
             'is_active' => true,
         ]);
-        Promo::updateOrCreate(['title' => 'Paket Nongkrong Hemat'], [
-            'banner' => 'assets/banner/banner-3.png',
-            'description' => 'Paket camilan dan Purple Latte untuk dinikmati bersama.',
+        Promo::updateOrCreate(['title' => 'Bebas Pilih Topping Sesukamu'], [
+            'banner' => 'assets/promo/promo-2.png',
+            'description' => 'Lengkapi pesanan dengan berbagai pilihan topping favorit seperti keju, oreo, almond, pistachio, meses, dan masih banyak lagi.',
             'start_date' => now()->subDay(),
             'end_date' => now()->addMonths(2),
             'is_active' => true,

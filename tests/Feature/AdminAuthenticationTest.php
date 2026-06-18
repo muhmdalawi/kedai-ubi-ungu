@@ -18,7 +18,12 @@ class AdminAuthenticationTest extends TestCase
         $this->post('/admin/login', ['email' => 'admin@test.local', 'password' => 'secret123'])
             ->assertRedirect('/admin');
         $this->assertAuthenticated();
-        $this->get('/admin')->assertOk()->assertSee('Dashboard');
+        $this->get('/admin')
+            ->assertOk()
+            ->assertSee('Dashboard')
+            ->assertSee('data-admin-shell', false)
+            ->assertSee('data-sidebar-toggle', false)
+            ->assertSee('admin-sidebar-nav', false);
     }
 
     public function test_non_admin_cannot_login_to_admin_panel(): void

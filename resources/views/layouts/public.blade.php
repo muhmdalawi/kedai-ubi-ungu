@@ -22,12 +22,12 @@
             <img src="{{ $businessProfile?->logo_url ?? asset('assets/logo/logo-4.png') }}" alt="Logo Kedai Ubi Ungu" class="h-12 w-12 rounded-2xl object-cover">
             <span class="hidden font-black text-ube-900 sm:block">Kedai Ubi Ungu</span>
         </a>
-        <nav class="hidden items-center gap-7 text-sm font-bold text-stone-600 lg:flex">
-            <a href="{{ route('home') }}" class="hover:text-ube-700">Home</a>
-            <a href="{{ route('menu.index') }}" class="hover:text-ube-700">Menu</a>
-            <a href="{{ route('gallery') }}" class="hover:text-ube-700">Galeri</a>
-            <a href="{{ route('promos') }}" class="hover:text-ube-700">Promo</a>
-            <a href="{{ route('contact') }}" class="hover:text-ube-700">Kontak</a>
+        <nav class="hidden items-center gap-2 lg:flex">
+            <a href="{{ route('home') }}" class="public-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" @if(request()->routeIs('home')) aria-current="page" @endif>Home</a>
+            <a href="{{ route('menu.index') }}" class="public-nav-link {{ request()->routeIs('menu.*') ? 'active' : '' }}" @if(request()->routeIs('menu.*')) aria-current="page" @endif>Menu</a>
+            <a href="{{ route('gallery') }}" class="public-nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" @if(request()->routeIs('gallery')) aria-current="page" @endif>Galeri</a>
+            <a href="{{ route('promos') }}" class="public-nav-link {{ request()->routeIs('promos') ? 'active' : '' }}" @if(request()->routeIs('promos')) aria-current="page" @endif>Promo</a>
+            <a href="{{ route('contact') }}" class="public-nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" @if(request()->routeIs('contact')) aria-current="page" @endif>Kontak</a>
         </nav>
         <div class="flex items-center gap-2">
             <a href="{{ route('checkout.index') }}" class="relative rounded-full bg-white p-3 text-ube-800 shadow-sm" aria-label="Keranjang">
@@ -38,8 +38,12 @@
             <a href="{{ route('checkout.index') }}" class="btn-primary hidden sm:inline-flex">Pesan Sekarang</a>
         </div>
     </div>
-    <nav data-mobile-nav class="container-site hidden flex-col gap-3 border-t border-ube-100 py-4 text-sm font-bold lg:hidden">
-        <a href="{{ route('home') }}">Home</a><a href="{{ route('menu.index') }}">Menu</a><a href="{{ route('gallery') }}">Galeri</a><a href="{{ route('promos') }}">Promo</a><a href="{{ route('contact') }}">Kontak</a>
+    <nav data-mobile-nav class="container-site hidden flex-col gap-1 border-t border-ube-100 py-4 text-sm font-bold lg:hidden">
+        <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+        <a href="{{ route('menu.index') }}" class="mobile-nav-link {{ request()->routeIs('menu.*') ? 'active' : '' }}">Menu</a>
+        <a href="{{ route('gallery') }}" class="mobile-nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}">Galeri</a>
+        <a href="{{ route('promos') }}" class="mobile-nav-link {{ request()->routeIs('promos') ? 'active' : '' }}">Promo</a>
+        <a href="{{ route('contact') }}" class="mobile-nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Kontak</a>
     </nav>
 </header>
 <main>@yield('content')</main>

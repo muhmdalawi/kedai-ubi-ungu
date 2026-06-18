@@ -34,8 +34,64 @@ function updateCartBadges() {
 window.addEventListener('cart:updated', updateCartBadges);
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadges();
+    const adminShell = document.querySelector('[data-admin-shell]');
+    const sidebarToggle = document.querySelector('[data-sidebar-toggle]');
+    if (adminShell && sidebarToggle) {
+        const applySidebarState = collapsed => {
+            adminShell.classList.toggle('sidebar-collapsed', collapsed);
+            sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+            sidebarToggle.setAttribute('aria-label', collapsed ? 'Perbesar sidebar' : 'Minimalkan sidebar');
+            sidebarToggle.setAttribute('title', collapsed ? 'Perbesar sidebar' : 'Minimalkan sidebar');
+            sidebarToggle.querySelector('[data-sidebar-collapse-icon]')?.classList.toggle('hidden', collapsed);
+            sidebarToggle.querySelector('[data-sidebar-expand-icon]')?.classList.toggle('hidden', !collapsed);
+        };
+        applySidebarState(localStorage.getItem('admin_sidebar_collapsed') === 'true');
+        sidebarToggle.addEventListener('click', () => {
+            const collapsed = !adminShell.classList.contains('sidebar-collapsed');
+            localStorage.setItem('admin_sidebar_collapsed', String(collapsed));
+            applySidebarState(collapsed);
+        });
+    }
+
     const mobileButton = document.querySelector('[data-mobile-menu]');
     mobileButton?.addEventListener('click', () => document.querySelector('[data-mobile-nav]')?.classList.toggle('nav-open'));
+
+    document.querySelectorAll('[data-banner-carousel]').forEach(carousel => {
+        const slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
+        const dots = [...carousel.querySelectorAll('[data-carousel-dot]')];
+        const interval = Number(carousel.dataset.carouselInterval || 5000);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let current = Math.max(0, slides.findIndex(slide => slide.classList.contains('is-active')));
+        let timer;
+
+        const show = index => {
+            current = (index + slides.length) % slides.length;
+            slides.forEach((slide, slideIndex) => {
+                const active = slideIndex === current;
+                slide.classList.toggle('is-active', active);
+                slide.setAttribute('aria-hidden', String(!active));
+            });
+            dots.forEach((dot, dotIndex) => {
+                const active = dotIndex === current;
+                dot.classList.toggle('is-active', active);
+                dot.setAttribute('aria-current', String(active));
+            });
+        };
+        const stop = () => window.clearInterval(timer);
+        const start = () => {
+            stop();
+            if (!reducedMotion && slides.length > 1) timer = window.setInterval(() => show(current + 1), interval);
+        };
+
+        carousel.querySelector('[data-carousel-prev]')?.addEventListener('click', () => { show(current - 1); start(); });
+        carousel.querySelector('[data-carousel-next]')?.addEventListener('click', () => { show(current + 1); start(); });
+        dots.forEach(dot => dot.addEventListener('click', () => { show(Number(dot.dataset.carouselDot)); start(); }));
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+        carousel.addEventListener('focusin', stop);
+        carousel.addEventListener('focusout', start);
+        start();
+    });
 
     document.querySelectorAll('[data-product-builder]').forEach(builder => {
         const price = Number(builder.dataset.price);

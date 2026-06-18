@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Product;
@@ -9,6 +10,18 @@ use App\Models\Testimonial;
 use App\Models\Topping;
 
 return [
+    'banners' => [
+        'label' => 'Banner Home', 'model' => Banner::class, 'search' => ['title', 'subtitle'],
+        'fields' => [
+            'title' => ['label' => 'Judul banner', 'type' => 'text', 'rules' => ['required', 'string', 'max:180']],
+            'subtitle' => ['label' => 'Subjudul', 'type' => 'textarea', 'rules' => ['nullable', 'string', 'max:1000']],
+            'image' => ['label' => 'Gambar banner', 'type' => 'image', 'rules' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:6144']],
+            'button_text' => ['label' => 'Teks tombol', 'type' => 'text', 'rules' => ['nullable', 'string', 'max:80']],
+            'button_url' => ['label' => 'URL tombol', 'type' => 'text', 'rules' => ['nullable', 'string', 'max:2000']],
+            'sort_order' => ['label' => 'Urutan', 'type' => 'number', 'rules' => ['required', 'integer', 'min:0']],
+            'is_active' => ['label' => 'Aktif', 'type' => 'boolean', 'rules' => ['boolean']],
+        ],
+    ],
     'categories' => [
         'label' => 'Kategori', 'model' => Category::class, 'search' => ['name', 'description'],
         'fields' => [

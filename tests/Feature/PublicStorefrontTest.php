@@ -18,7 +18,10 @@ class PublicStorefrontTest extends TestCase
 
     public function test_public_pages_render_with_seeded_content(): void
     {
-        $this->get('/')->assertOk()->assertSee('Rasa hangat');
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('data-banner-carousel', false)
+            ->assertSee('Dari Kebun ke Meja Anda');
         $this->get('/menu')->assertOk()->assertSee('Purple Latte');
         $this->get('/menu/purple-latte')->assertOk()->assertSee('Tambah ke Keranjang');
         $this->get('/galeri')->assertOk();
@@ -34,5 +37,13 @@ class PublicStorefrontTest extends TestCase
         $this->get('/menu?category='.$product->category_id)->assertOk()->assertSee($product->name);
         $this->getJson('/api/products/'.$product->id.'/configuration')
             ->assertOk()->assertJsonPath('name', 'Purple Latte')->assertJsonCount(2, 'variants');
+    }
+
+    public function test_public_navigation_marks_current_page_active(): void
+    {
+        $this->get('/menu')
+            ->assertOk()
+            ->assertSee('public-nav-link active', false)
+            ->assertSee('aria-current="page"', false);
     }
 }

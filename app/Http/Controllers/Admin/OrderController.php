@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusinessProfile;
+use App\Models\Contact;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -24,6 +26,15 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('admin.orders.show', ['order' => $order->load('items.toppings')]);
+    }
+
+    public function receipt(Order $order)
+    {
+        return view('admin.orders.receipt', [
+            'order' => $order->load('items.toppings'),
+            'profile' => BusinessProfile::first(),
+            'contact' => Contact::first(),
+        ]);
     }
 
     public function update(Request $request, Order $order)
