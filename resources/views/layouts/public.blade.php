@@ -63,7 +63,7 @@
             </div>
             <div>
                 <h3 class="font-black text-white">Jelajahi</h3>
-                <div class="mt-4 grid gap-2 text-sm"><a href="{{ route('menu.index') }}">Katalog Menu</a><a href="{{ route('checkout.index') }}">Pesan Online</a><a href="{{ route('promos') }}">Promo Terbaru</a><a href="{{ route('admin.login') }}">Admin</a></div>
+                <div class="mt-4 grid gap-2 text-sm"><a href="{{ route('menu.index') }}">Katalog Menu</a><a href="{{ route('checkout.index') }}">Pesan Online</a><a href="{{ route('promos') }}">Promo Terbaru</a></div>
             </div>
             <div>
                 <h3 class="font-black text-white">Kunjungi Kami</h3>
