@@ -9,7 +9,7 @@
     <meta name="description" content="@yield('description', 'Kedai Ubi Ungu menghadirkan makanan dan minuman premium berbahan ubi ungu.')">
     <meta property="og:title" content="@yield('title', 'Kedai Ubi Ungu')">
     <meta property="og:description" content="@yield('description', 'Kreasi ubi ungu premium, dibuat segar setiap hari.')">
-    <meta property="og:image" content="{{ asset('assets/banner/banner-1.png') }}">
+    <meta property="og:image" content="{{ asset('assets/banner/banner.png') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}?v=2">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}?v=2">
     <link rel="preconnect" href="https://fonts.googleapis.com">

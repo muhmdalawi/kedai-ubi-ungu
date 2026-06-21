@@ -38,7 +38,7 @@
                 </article>
             @empty
                 <article class="absolute inset-0">
-                    <img src="{{ asset('assets/banner/banner-1.png') }}" alt="Kedai Ubi Ungu"
+                    <img src="{{ asset('assets/banner/banner.png') }}" alt="Kedai Ubi Ungu"
                         class="absolute inset-0 h-full w-full object-cover">
                     <div class="absolute inset-0 bg-ube-950/75"></div>
                     <div class="container-site relative flex min-h-[560px] items-center py-20 text-white sm:min-h-[620px]">
@@ -52,7 +52,7 @@
 
             @if ($banners->count() > 1)
                 <!-- <button data-carousel-prev type="button" class="absolute left-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-ube-950/45 text-2xl font-bold text-white backdrop-blur hover:bg-white hover:text-ube-950 sm:left-7" aria-label="Banner sebelumnya">‹</button>
-            <button data-carousel-next type="button" class="absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-ube-950/45 text-2xl font-bold text-white backdrop-blur hover:bg-white hover:text-ube-950 sm:right-7" aria-label="Banner berikutnya">›</button> -->
+                <button data-carousel-next type="button" class="absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-ube-950/45 text-2xl font-bold text-white backdrop-blur hover:bg-white hover:text-ube-950 sm:right-7" aria-label="Banner berikutnya">›</button> -->
                 <div class="absolute inset-x-0 bottom-8 z-10 flex justify-center gap-2" aria-label="Navigasi banner">
                     @foreach ($banners as $banner)
                         <button data-carousel-dot="{{ $loop->index }}" type="button"
