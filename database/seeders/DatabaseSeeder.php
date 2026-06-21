@@ -110,9 +110,30 @@ class DatabaseSeeder extends Seeder
         }
 
         $customerNames = [
-            'Andi', 'Budi', 'Citra', 'Dewi', 'Eka', 'Fajar', 'Gita', 'Hana',
-            'Indra', 'Joko', 'Karin', 'Lina', 'Maya', 'Nadia', 'Oki', 'Putri',
-            'Raka', 'Salsa', 'Tia', 'Vina', 'Wahyu', 'Yani', 'Zaki', 'Rizky',
+            'Andi',
+            'Budi',
+            'Citra',
+            'Dewi',
+            'Eka',
+            'Fajar',
+            'Gita',
+            'Hana',
+            'Indra',
+            'Joko',
+            'Karin',
+            'Lina',
+            'Maya',
+            'Nadia',
+            'Oki',
+            'Putri',
+            'Raka',
+            'Salsa',
+            'Tia',
+            'Vina',
+            'Wahyu',
+            'Yani',
+            'Zaki',
+            'Rizky',
         ];
         $statuses = ['completed', 'completed', 'completed', 'completed', 'processing', 'shipping', 'pending'];
         $demoOrders = [];
@@ -130,9 +151,9 @@ class DatabaseSeeder extends Seeder
                 ->setTime(8 + ($index % 12), ($index * 13) % 60);
 
             $demoOrders[] = [
-                'order_number' => 'KUU-DEMO-'.str_pad((string) $index, 4, '0', STR_PAD_LEFT),
-                'customer_name' => $customerNames[$customerIndex % count($customerNames)].' '.str_pad((string) ($customerIndex + 1), 3, '0', STR_PAD_LEFT),
-                'whatsapp' => '62813'.str_pad((string) ($customerIndex + 1), 8, '0', STR_PAD_LEFT),
+                'order_number' => 'KUU-DEMO-' . str_pad((string) $index, 4, '0', STR_PAD_LEFT),
+                'customer_name' => $customerNames[$customerIndex % count($customerNames)] . ' ' . str_pad((string) ($customerIndex + 1), 3, '0', STR_PAD_LEFT),
+                'whatsapp' => '62813' . str_pad((string) ($customerIndex + 1), 8, '0', STR_PAD_LEFT),
                 'address' => 'Pelanggan demo wilayah Jakarta dan sekitarnya',
                 'total_price' => ($product->price + $variantPrice) * $quantity,
                 'status' => $statuses[$index % count($statuses)],
@@ -144,8 +165,14 @@ class DatabaseSeeder extends Seeder
 
         foreach (array_chunk($demoOrders, 250) as $chunk) {
             Order::upsert($chunk, ['order_number'], [
-                'customer_name', 'whatsapp', 'address', 'total_price', 'status',
-                'notes', 'created_at', 'updated_at',
+                'customer_name',
+                'whatsapp',
+                'address',
+                'total_price',
+                'status',
+                'notes',
+                'created_at',
+                'updated_at',
             ]);
         }
 
@@ -155,7 +182,7 @@ class DatabaseSeeder extends Seeder
         $ordersByNumber = Order::where('order_number', 'like', 'KUU-DEMO-%')
             ->get(['id', 'order_number'])
             ->keyBy('order_number');
-        $variants = $savedProducts->mapWithKeys(fn ($product) => [
+        $variants = $savedProducts->mapWithKeys(fn($product) => [
             $product->id => $product->variants()->get()->keyBy('variant_name'),
         ]);
         $demoItems = [];
@@ -204,7 +231,7 @@ class DatabaseSeeder extends Seeder
 
         foreach (range(1, 7) as $number) {
             Gallery::updateOrCreate(['title' => "Cerita Kedai {$number}"], [
-                'image' => "assets/banner/banner-{$number}.png",
+                'image' => "assets/banner/banner.png",
                 'category' => $number <= 3 ? 'Produk' : 'Aktivitas Kedai',
                 'description' => 'Dokumentasi kreasi dan kegiatan Kedai Ubi Ungu.',
             ]);
