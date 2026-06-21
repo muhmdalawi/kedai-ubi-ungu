@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             Banner::updateOrCreate(['sort_order' => $index + 1], [
                 'title' => $title,
                 'subtitle' => $subtitle,
-                'image' => 'assets/banner/banner-' . ($index + 1) . '.png',
+                'image' => 'assets/banner/banner.png',
                 'button_text' => $buttonText,
                 'button_url' => $buttonUrl,
                 'is_active' => true,
@@ -54,14 +54,14 @@ class DatabaseSeeder extends Seeder
 
         $products = [
             ['Makanan', 'Lumpia Ubi Ungu Coklat Lumer', 'lumpia-ubi-ungu-coklat-lumer', 10000, 'product-5.png', 'Lumpia ubi ungu dengan isian coklat lumer, harga 10k isi 3 pcs.', true, false],
-            ['Makanan', 'Lumpia Ubi Ungu Keju Lumer', 'lumpia-ubi-ungu-keju-lumer', 10000, 'product-5.png', 'Lumpia ubi ungu dengan isian keju lumer, harga 10k isi 3 pcs.', true, false],
-            ['Makanan', 'Lumpia Ubi Ungu Mozarella', 'lumpia-ubi-ungu-mozarella', 12000, 'product-5.png', 'Lumpia ubi ungu dengan isian mozarella, harga 12k isi 3 pcs.', true, false],
+            ['Makanan', 'Lumpia Ubi Ungu Keju Lumer', 'lumpia-ubi-ungu-keju-lumer', 10000, 'product-4.png', 'Lumpia ubi ungu dengan isian keju lumer, harga 10k isi 3 pcs.', true, false],
+            ['Makanan', 'Lumpia Ubi Ungu Mozarella', 'lumpia-ubi-ungu-mozarella', 12000, 'product-4.png', 'Lumpia ubi ungu dengan isian mozarella, harga 12k isi 3 pcs.', true, false],
 
             ['Makanan', 'Bola-Bola Ubi Ungu Coklat Lumer', 'bola-bola-ubi-ungu-coklat-lumer', 10000, 'product-2.png', 'Bola-bola ubi ungu dengan isian coklat lumer, harga 10k isi 3 pcs.', true, false],
             ['Makanan', 'Bola-Bola Ubi Ungu Keju Lumer', 'bola-bola-ubi-ungu-keju-lumer', 10000, 'product-2.png', 'Bola-bola ubi ungu dengan isian keju lumer, harga 10k isi 3 pcs.', true, false],
             ['Makanan', 'Bola-Bola Ubi Ungu Mozarella', 'bola-bola-ubi-ungu-mozarella', 10000, 'product-2.png', 'Bola-bola ubi ungu dengan isian mozarella, harga 10k isi 3 pcs.', false, false],
 
-            ['Makanan', 'Gabin Ubi Ungu', 'gabin-ubi-ungu', 3000, 'product-4.png', 'Gabin renyah dengan isian ubi ungu, tersedia harga satuan 3k atau 10k isi 4 pcs.', true, false],
+            ['Makanan', 'Gabin Ubi Ungu', 'gabin-ubi-ungu', 3000, 'product-1.png', 'Gabin renyah dengan isian ubi ungu, tersedia harga satuan 3k atau 10k isi 4 pcs.', true, false],
 
             ['Minuman', 'Es Ubi Ungu Original 380ml', 'es-ubi-ungu-original-380ml', 7000, 'product-3.png', 'Es ubi ungu original ukuran 380ml.', true, false],
             ['Minuman', 'Es Ubi Ungu Original 400ml', 'es-ubi-ungu-original-400ml', 8000, 'product-3.png', 'Es ubi ungu original ukuran 400ml.', true, false],
@@ -188,14 +188,14 @@ class DatabaseSeeder extends Seeder
         }
 
         Promo::updateOrCreate(['title' => 'Menu Favorit Pelanggan, Wajib Dicoba!'], [
-            'banner' => 'assets/promo/promo-1.png',
+            'banner' => 'assets/promo/promo.png',
             'description' => 'Temukan produk best seller Kedai Ubi Ungu mulai dari Es Ubi Ungu, Lumpia Ubi Ungu, hingga Bola-Bola Ubi Ungu yang selalu menjadi pilihan pelanggan.',
             'start_date' => now()->subDays(7),
             'end_date' => now()->addMonths(3),
             'is_active' => true,
         ]);
         Promo::updateOrCreate(['title' => 'Bebas Pilih Topping Sesukamu'], [
-            'banner' => 'assets/promo/promo-2.png',
+            'banner' => 'assets/promo/promo.png',
             'description' => 'Lengkapi pesanan dengan berbagai pilihan topping favorit seperti keju, oreo, almond, pistachio, meses, dan masih banyak lagi.',
             'start_date' => now()->subDay(),
             'end_date' => now()->addMonths(2),
